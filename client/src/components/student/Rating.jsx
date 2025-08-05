@@ -1,11 +1,11 @@
 import React from 'react'
 
-const App = () => {
+const Rating = () => {
   return (
     <div>
-      <h1>Hello</h1>
+      <h1>Rating</h1>
     </div>
   )
 }
 
-export default App
+export default Rating
