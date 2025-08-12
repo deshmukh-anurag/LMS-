@@ -3,8 +3,11 @@ const AppContext = createContext(null);
 
 export const AppContextProvider = ({ children }) => {
 
+    const value={
+
+    }
     return(
-        <AppContext.Provider value={{}}>
+        <AppContext.Provider value={value}>
             {children}
         </AppContext.Provider>
     )

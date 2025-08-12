@@ -1,9 +1,33 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
+import { assets } from '../../assets/assets'
+import {useClerk, UserButton ,useUser} from '@clerk/clerk-react'
 const Navbar = () => {
+  const isCourseListPage = location.pathname.includes('/course-list');
+  const {openSignIn} = useClerk();
+  const {user} = useUser();
   return (
-    <div>
-      <h1>Navbar</h1>
+    <div className={`flex justify-between items-center bg-gradient-to-r from-blue-50 to-cyan-50 p-4 shadow-md fixed top-0 left-0 right-0 z-50`}>
+      <div className="flex items-center gap-4">
+        <Link to="/">
+          <img src={assets.logo} alt="Logo" className='w-28 lg:w-32 cursor-pointer hover:opacity-90 transition-opacity' />
+        </Link>
+      </div>
+
+      <div className='flex items-center gap-8 text-gray-700 font-medium'>
+        <div className='flex items-center gap-6'>
+          { user && <>
+            <button className='hover:text-blue-600 hover:scale-105 transition-all duration-300'>  Become Educator</button>
+            <Link to='/my-enrollment' className="hover:text-blue-600 hover:scale-105 transition-all duration-300">
+              My Enrollment
+            </Link>
+          </>
+          }
+        </div>
+        {user ? <UserButton /> : <button onClick={() => { openSignIn() }} className='bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-6 py-2 rounded-md hover:from-blue-700 hover:to-cyan-700 hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300'>
+          Create Account
+        </button>}
+      </div>
     </div>
   )
 }
