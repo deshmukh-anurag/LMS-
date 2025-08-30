@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes, Route, useMatch } from 'react-router-dom'
 import Home from './pages/student/Home'
-import CourseList from './pages/student/Courselist'
+import CourseList from './pages/student/CourseList'
 import CourseDetails from './pages/student/CourseDetails'
 import Educator from './pages/Educator/Educator'
 import Dashboard from './pages/Educator/Dashboard'
