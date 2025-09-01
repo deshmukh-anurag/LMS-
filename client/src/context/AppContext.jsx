@@ -25,6 +25,29 @@ export const AppContextProvider = ({ children }) => {
             return 0;
         }
     }
+    const formatMinutes = (minutes) => {
+        const hrs = Math.floor(minutes / 60);
+        const mins = minutes % 60;
+        if (hrs > 0) return `${hrs}h ${mins}m`;
+        return `${mins}m`;
+    }
+
+    const calculateChapterTime = (chapter) => {
+        if (!chapter || !Array.isArray(chapter.chapterContent)) return '0m';
+        const total = chapter.chapterContent.reduce((sum, lec) => sum + (lec.lectureDuration || 0), 0);
+        return formatMinutes(total);
+    }
+
+    const calculateCourseDuration = (course) => {
+        if (!course || !Array.isArray(course.courseContent)) return '0m';
+        const total = course.courseContent.reduce((cSum, ch) => cSum + (ch.chapterContent?.reduce((lSum, lec) => lSum + (lec.lectureDuration || 0), 0) || 0), 0);
+        return formatMinutes(total);
+    }
+
+    const calculateNoOfLectures = (course) => {
+        if (!course || !Array.isArray(course.courseContent)) return 0;
+        return course.courseContent.reduce((sum, ch) => sum + (ch.chapterContent?.length || 0), 0);
+    }
     useEffect(() => {
         fetchAllCourses();
     }, []);
@@ -32,7 +55,10 @@ export const AppContextProvider = ({ children }) => {
         currency,
         allCourses,
         navigate,
-        calculateRating,
+    calculateRating,
+    calculateChapterTime,
+    calculateCourseDuration,
+    calculateNoOfLectures,
         isEducator
     }
     return (
