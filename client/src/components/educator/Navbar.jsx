@@ -1,4 +1,6 @@
 import React from 'react'
+import { dummyEducatorData } from '../../assets/assets'
+import {useClerk, UserButton ,useUser} from '@clerk/clerk-react'
 
 const Navbar = () => {
   return (

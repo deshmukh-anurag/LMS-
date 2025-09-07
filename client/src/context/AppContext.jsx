@@ -9,6 +9,8 @@ export const AppContextProvider = ({ children }) => {
     const navigate=useNavigate()
     const [allCourses, setAllCourses] = useState([]);
     const [isEducator, setIsEducator] = useState(true);
+    const [userData, setUserData] = useState(null);
+    const [enrolledCourses, setEnrolledCourses] = useState([]);
 
     const fetchAllCourses = async () => {
         setAllCourses(dummyCourses)
@@ -24,6 +26,10 @@ export const AppContextProvider = ({ children }) => {
             console.error('Error calculating rating:', error);
             return 0;
         }
+    }
+    const fetchEnrolledCourses = async () => {
+        // dummyCourses.filter(course => course.enrolledUsers.includes(userData.id));
+        setEnrolledCourses(dummyCourses);
     }
     const formatMinutes = (minutes) => {
         const hrs = Math.floor(minutes / 60);
@@ -50,16 +56,21 @@ export const AppContextProvider = ({ children }) => {
     }
     useEffect(() => {
         fetchAllCourses();
+        fetchEnrolledCourses();
     }, []);
     const value = {
         currency,
         allCourses,
         navigate,
-    calculateRating,
-    calculateChapterTime,
-    calculateCourseDuration,
-    calculateNoOfLectures,
-        isEducator
+        calculateRating,
+        calculateChapterTime,
+        calculateCourseDuration,
+        calculateNoOfLectures,
+        isEducator,
+        userData,
+        setUserData,
+        enrolledCourses,
+        fetchEnrolledCourses
     }
     return (
         <AppContext.Provider value={value}>
