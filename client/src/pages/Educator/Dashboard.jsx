@@ -10,9 +10,9 @@ const Dashboard = () => {
     // Fetch and set dashboard data here
     setDashboardData(dummyDashboardData);
   }
-  useEffect(()=>(
-    fetchDashboardData()
-  ),[]);
+  useEffect(() => {
+    fetchDashboardData();
+  }, []);
   return dashboardData ? (
     <div className="p-6 pt-24">
       <h1 className="text-2xl font-bold mb-6 text-gray-800">Dashboard Overview</h1>

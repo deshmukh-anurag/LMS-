@@ -55,8 +55,11 @@ export const AppContextProvider = ({ children }) => {
         return course.courseContent.reduce((sum, ch) => sum + (ch.chapterContent?.length || 0), 0);
     }
     useEffect(() => {
-        fetchAllCourses();
-        fetchEnrolledCourses();
+        const initializeData = async () => {
+            await fetchAllCourses();
+            await fetchEnrolledCourses();
+        };
+        initializeData();
     }, []);
     const value = {
         currency,
