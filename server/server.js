@@ -16,6 +16,7 @@ try {
 }
 
 //Middlewares
+app.use(express.json());
 app.use(cors());
 
 
@@ -24,7 +25,7 @@ app.get('/', (req, res) => {
     res.send("API Working")
 })
 
-app.post('/clerk',express.json(),clerkWebhooks);
+app.post('/clerk',clerkWebhooks);
 
 //PORT
 
