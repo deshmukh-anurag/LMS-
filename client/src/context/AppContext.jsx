@@ -1,6 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { dummyCourses } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
+import {useAuth,useUser} from "@clerk/clerk-react"
+import { use } from "react";
 export const AppContext = createContext(null);
 
 export const AppContextProvider = ({ children }) => {
@@ -15,6 +17,10 @@ export const AppContextProvider = ({ children }) => {
     const fetchAllCourses = async () => {
         setAllCourses(dummyCourses)
     }
+
+    const {getToken}=useAuth();
+    const {user}= useUser();
+
     const calculateRating=(course)=>{
         try {
             if(!course || !course.courseRatings || course.courseRatings.length === 0){
@@ -54,6 +60,17 @@ export const AppContextProvider = ({ children }) => {
         if (!course || !Array.isArray(course.courseContent)) return 0;
         return course.courseContent.reduce((sum, ch) => sum + (ch.chapterContent?.length || 0), 0);
     }
+
+    const logToken= async()=>{
+        console.log(await getToken())
+    }
+
+    useEffect(()=>{
+        if(user){
+            logToken();
+        }
+    },[user])
+
     useEffect(() => {
         const initializeData = async () => {
             await fetchAllCourses();
