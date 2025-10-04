@@ -25,6 +25,7 @@ export const clerkWebhooks = async (req, res) => {
                 }
                 console.log(userData);
                 await User.create(userData)
+                res.json({})
                 break;
             }
             case 'user.updated': {
