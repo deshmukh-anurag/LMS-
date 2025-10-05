@@ -8,6 +8,7 @@ import { updateRoleToEducator } from './controllers/educatorControllers.js';
 import educatorRouter from './routes/educatorRoutes.js';
 import { clerkMiddleware } from '@clerk/express';
 import morgan from 'morgan';
+import connectCloudinary from './configs/cloudinary.js';
 
 //Initialize express app
 const app = express();
@@ -19,10 +20,19 @@ try {
   console.error('Failed to connect to database:', error);
   process.exit(1);
 }
+//Connect to Cloudinary
+try {
+  await connectCloudinary();
+} catch (error) {
+  console.error('Failed to connect to Cloudinary:', error);
+  process.exit(1);
+}
+
 
 //Middlewares
 app.use(express.json());
 app.use(cors());
+app.use(express.urlencoded({ extended: true }));
 app.use(clerkMiddleware());
 app.use(morgan('dev'));
 
