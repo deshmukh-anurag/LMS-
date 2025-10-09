@@ -70,13 +70,13 @@ const courseSchema=new mongoose.Schema({
 
         educator:{
             type:String,
-            ref:'user',
+            ref:'User',
             required: true
         },
 
         enrolledStudents:{
             type:String,
-            ref:'user' 
+            ref:'User' 
         }
 
 },{timestamps:true,minimize:false});

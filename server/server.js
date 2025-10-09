@@ -9,6 +9,8 @@ import educatorRouter from './routes/educatorRoutes.js';
 import { clerkMiddleware } from '@clerk/express';
 import morgan from 'morgan';
 import connectCloudinary from './configs/cloudinary.js';
+import courseRouter from './routes/courseRoutes.js';
+
 
 //Initialize express app
 const app = express();
@@ -45,6 +47,8 @@ app.post('/clerk', clerkWebhooks);
 
 // app.use('/api', clerkMiddleware);
 app.use('/api/educator', educatorRouter);
+
+app.use('/api/course',courseRouter);
 
 //PORT
 
