@@ -74,10 +74,10 @@ const courseSchema=new mongoose.Schema({
             required: true
         },
 
-        enrolledStudents:{
+        enrolledStudents:[{
             type:String,
             ref:'User' 
-        }
+        }]
 
 },{timestamps:true,minimize:false});
 

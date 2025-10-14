@@ -23,7 +23,7 @@ const userSchema=new mongoose.Schema(
         type:mongoose.Schema.Types.ObjectId,
         ref:'Course'
     }],
-    },{timestamps:true} 
+    },{timestamps:true, _id:false} 
 );
 
 const User=mongoose.model('User',userSchema);

@@ -37,7 +37,7 @@ try {
 // middleware
 app.use(cors());
 app.use(clerkMiddleware())
-// app.use(morgan('dev'));
+app.use(morgan('dev'));
 
 
 // Routes
